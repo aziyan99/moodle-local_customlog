@@ -25,15 +25,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
-
-    $settings = new admin_settingpage('local_customlog', get_string('pluginname', 'local_customlog'));
-
-    $ADMIN->add('localplugins', $settings);
-
-    $reportlink = new moodle_url('/local/customlog/report_table.php', []);
-    $reportpage = html_writer::link($reportlink, get_string('reportpage', 'local_customlog', $reportlink));
-    $settings->add(new admin_setting_heading(
-            'pluginname',
-            get_string('availablepages', 'local_customlog'), $reportpage)
-    );
+    $reportpageuri = new moodle_url('/local/customlog/report_table.php');
+    $generatorpage = new admin_externalpage('local_customlog', get_string('pluginname', 'local_customlog'), $reportpageuri);
+    $ADMIN->add('localplugins', $generatorpage);
 }
