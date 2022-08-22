@@ -46,22 +46,15 @@ class customlog_table extends table_sql
         $this->define_headers($headers);
     }
 
-    /**
-     * @param $values
-     * @return false|string
-     */
     function col_timecreated($values)
     {
         return '<span>' . date('d M y H:i:s', $values->timecreated) . '</span>';
     }
 
-    /**
-     * @param $values
-     * @return mixed
-     */
     function col_logs($values)
     {
-        return '<a href="javascript:void(0);" class="customlog-showlog btn btn-default text-primary" data-id="' . $values->id . '"><i class="fa fa-search"></i></a>';
+        $deletebutton = '<a href="javascript:void(0);" class="text-primary" role="button" data-id="' . $values->id . '"><i class="icon fa fa-trash fa-fw"></i></a>';
+        return '<a href="javascript:void(0);" class="customlog-showlog text-primary" role="button" data-id="' . $values->id . '"><i class="icon fa fa-search fa-fw"></i></a>' . $deletebutton;
     }
 
     function col_relateduserid($values)
@@ -70,8 +63,8 @@ class customlog_table extends table_sql
         $user = $DB->get_record('user', ['id' => $values->relateduserid]);
         if (!$user) {
             return '<a href="javascript:void(0);">' . get_string('userunavailable', 'local_customlog') . '</a>';
-        } else {
-            return '<a href="/user/profile.php?id=' . $user->id . '">' . $user->firstname . " " . $user->lastname . '</a>';
         }
+
+        return '<a href="/user/profile.php?id=' . $user->id . '">' . $user->firstname . " " . $user->lastname . '</a>';
     }
 }
