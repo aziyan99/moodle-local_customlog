@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * ${PLUGINNAME} file description here.
+ * local_customlog admin setting page.
  *
- * @package    ${PLUGINNAME}
- * @copyright  2022 rajaazian <${USEREMAIL}>
+ * @package local_customlog
+ * @copyright  2022 rajaazian <rajaazian08@gmai.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

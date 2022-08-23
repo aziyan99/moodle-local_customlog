@@ -15,10 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * ${PLUGINNAME} file description here.
+ * local_customlog table class
+ * to show logs.
  *
- * @package    ${PLUGINNAME}
- * @copyright  2022 rajaazian <${USEREMAIL}>
+ * @package local_customlog
+ * @copyright  2022 rajaazian <rajaazian08@gmai.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -46,17 +47,37 @@ class customlog_table extends table_sql
         $this->define_headers($headers);
     }
 
+    /**
+     * timecreated column
+     *
+     * @param $values
+     * @return string
+     */
     function col_timecreated($values)
     {
         return '<span>' . date('d M y H:i:s', $values->timecreated) . '</span>';
     }
 
+    /**
+     * logs column
+     *
+     * @param $values
+     * @return string
+     */
     function col_logs($values)
     {
         $deletebutton = '<a href="javascript:void(0);" class="text-primary" role="button" data-id="' . $values->id . '"><i class="icon fa fa-trash fa-fw"></i></a>';
         return '<a href="javascript:void(0);" class="customlog-showlog text-primary" role="button" data-id="' . $values->id . '"><i class="icon fa fa-search fa-fw"></i></a>' . $deletebutton;
     }
 
+    /**
+     * relateduserid column
+     *
+     * @param $values
+     * @return string
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     function col_relateduserid($values)
     {
         global $DB;

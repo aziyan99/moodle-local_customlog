@@ -15,10 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * ${PLUGINNAME} file description here.
+ * local_customlog services description
+ * for plugin.
  *
- * @package    ${PLUGINNAME}
- * @copyright  2022 rajaazian <${USEREMAIL}>
+ * @package local_customlog
+ * @copyright  2022 rajaazian <rajaazian08@gmai.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -42,7 +43,6 @@ $functions = array(
         'description' => 'Fetch log by id',
         'type' => 'read',
         'ajax' => true,
-//        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE)    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
         'capabilities' => '',
     ),
 );

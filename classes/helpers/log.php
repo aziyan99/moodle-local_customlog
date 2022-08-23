@@ -15,9 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * ${PLUGINNAME} file description here.
+ * local_customlog helper class
+ * to store log
  *
- * @package    ${PLUGINNAME}
+ * @package    local_customlog
  * @copyright  2022 rajaazian <${USEREMAIL}>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,27 +26,44 @@
 namespace local_customlog\helpers;
 
 
+use dml_exception;
 use RuntimeException;
+use stdClass;
 
 defined('MOODLE_INTERNAL') || die;
 
 class log
 {
+
+    /**
+     * Store the log
+     *
+     * @param array $messages
+     * @return void
+     */
     public static function store_log(array $messages): void
     {
         global $DB, $USER;
         try {
-            $log = new \stdClass();
+            $log = new stdClass();
             $log->timecreated = time();
             $log->relateduserid = $USER->id;
             $log->logs = json_encode($messages);
             $DB->insert_record('cl_store', $log);
-        } catch (\dml_exception $e) {
+        } catch (dml_exception $e) {
             var_dump($e);
             die;
         }
     }
 
+    /**
+     * fetch saved log
+     *
+     * @param $action
+     * @param $logid
+     * @return mixed|stdClass
+     * @throws dml_exception
+     */
     public static function fetch_log($action, $logid)
     {
         global $DB;
