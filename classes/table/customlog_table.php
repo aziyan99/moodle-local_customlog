@@ -39,11 +39,11 @@ class customlog_table extends table_sql
     {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('relateduserid', 'timecreated', 'logs');
+        $columns = array('relateduserid', 'objectcontext', 'timecreated', 'logs');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array('Initiator', 'Time Created', 'Logs');
+        $headers = array('Initiator', 'Context of Object', 'Time Created', 'Logs');
         $this->define_headers($headers);
     }
 
@@ -87,5 +87,10 @@ class customlog_table extends table_sql
         }
 
         return '<a href="/user/profile.php?id=' . $user->id . '">' . $user->firstname . " " . $user->lastname . '</a>';
+    }
+
+    function col_objectcontext($values)
+    {
+        return '<span>' . $values->objectcontext ?? '-' . '</span>';
     }
 }

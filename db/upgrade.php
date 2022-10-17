@@ -34,7 +34,23 @@ function xmldb_local_customlog_upgrade($oldversion)
     global $CFG, $DB;
 
     $dbman = $DB->get_manager();
-    if ($oldversion < 2022081905) {
+
+    if ($oldversion < 2022081908) {
+
+        // Define field objectcontext to be added to cl_store.
+        $table = new xmldb_table('cl_store');
+        $field = new xmldb_field('objectcontext', XMLDB_TYPE_TEXT, null, null, null, null, null, 'relateduserid');
+
+        // Conditionally launch add field objectcontext.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Customlog savepoint reached.
+        upgrade_plugin_savepoint(true, 2022081908, 'local', 'customlog');
+    }
+
+    if ($oldversion < 2022081907) {
 
         // Define field relateduserid to be added to cl_store.
         $table = new xmldb_table('cl_store');
